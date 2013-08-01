@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import javax.persistence.CascadeType;
@@ -30,10 +31,6 @@ public class Meeting {
 	@Column(name="MEETING_DATE")
 	private Date meetingDate;
 	
-/*	@ManyToMany(cascade = {CascadeType.REMOVE})
-	@JoinTable(name="EMPLOYEE_MEETING", 
-				joinColumns={@JoinColumn(name="MEETING_ID")}, 
-				inverseJoinColumns={@JoinColumn(name="EMPLOYEE_ID")})*/
 	@ManyToMany(mappedBy="meetings")	
 	private Set<Employee> employees = new HashSet<Employee>();
 	

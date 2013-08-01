@@ -1,12 +1,15 @@
 package net.viralpatel.hibernate;
  
+import java.util.Set;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
  
 public class Main {
  
     public static void main(String[] args) {
-    	delete(Long.valueOf(14));
+    	delete(Long.valueOf(16));
     	return;
     	/*
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -36,9 +39,12 @@ public class Main {
     	SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         session.beginTransaction();
-        
         Meeting meeting1 = new Meeting();
         meeting1 = (Meeting)session.get(Meeting.class, i);
+        Set<Employee> employees = meeting1.getEmployees();
+        for(Employee employe : employees){
+        	employe.getMeetings().remove(meeting1);
+        }
         System.out.println(meeting1.getSubject());
         session.delete(meeting1);
         session.getTransaction().commit();
